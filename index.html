@@ -15,7 +15,9 @@
         // Initialize the Telegram WebApp
 let user = null;
 async function x(){
+window.Telegram.WebApp.ready()
   user = window.Telegram.WebApp.initDataUnsafe.user
+  //document.write(user)
   //setTg(tgData);
   } 
   await x();
