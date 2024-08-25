@@ -14,13 +14,23 @@
     <script>
         // Initialize the Telegram WebApp
 let user = null;
-async function x(){
 window.Telegram.WebApp.ready()
-  user = window.Telegram.WebApp.initDataUnsafe.user
-  //document.write(user)
+function initTg() {
+  if (typeof window !== '
+undefined' && window.Telegram &&
+window.Telegram.WebApp) {
+  console.log('Telegram WebApp is
+ set');
+  user = window.Telegram.WebApp
   //setTg(tgData);
-  } 
-  await x();
+  } else {
+  console.log('Telegram WebApp is
+ undefined, retrying…');
+  setTimeout(initTg, 500);
+  }
+  }
+  initTg();
+
         // Display the user's username in the <h1> header
         const usernameHeader = document.getElementById('username');
         if (user && user.username) {
