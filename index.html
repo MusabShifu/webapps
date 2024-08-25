@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram WebApp User Info</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <header>
+        <h1 id="username">Loading...</h1>
+    </header>
+
+    <script>
+        // Initialize the Telegram WebApp
+        Telegram.WebApp.ready();
+
+        // Get the current user's information
+        const user = Telegram.WebApp.initDataUnsafe.user;
+
+        // Display the user's username in the <h1> header
+        const usernameHeader = document.getElementById('username');
+        if (user && user.username) {
+            usernameHeader.textContent = `Welcome, @${user.username}!`;
+        } else {
+            usernameHeader.textContent = 'Username not available';
+        }
+    </script>
+</body>
+</html>
