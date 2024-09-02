@@ -1,36 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram WebApp User Info</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<title></title>
 </head>
 <body>
-    <header>
-        <h1 id="username">Loading...</h1>
-    </header>
+<h1 id="greeting"></h1>
+<script type="text/javascript">
+// Function to get the query parameters from the URL
+function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        name: params.get('name')
+    };
+}
 
-    <script>
-        // Initialize the Telegram WebApp
-        Telegram.WebApp.ready();
-		window.Telegram.WebApp.ready();
-        // Display the user's username in the <h1> header
-        const usernameHeader = document.getElementById('username');
+// Function to handle the query parameters and update the DOM
+function handleParams() {
+    const params = getQueryParams();
+    const greetingElement = document.getElementById('greeting');
 
-        // Check if the Telegram WebApp API is available
-        if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) {
-            // Get the current user's information
-            const user = Telegram.WebApp.initDataUnsafe.user;
+    if (params.name) {
+        greetingElement.textContent = `Hello, ${params.name}!`;
+    } else {
+        greetingElement.textContent = 'Hello, Guest!';
+    }
+}
 
-            if (user && user.username) {
-                usernameHeader.textContent = `Welcome, @${user.username}!`;
-            } else {
-                usernameHeader.textContent = 'Username not available';
-            }
-        } else {
-            usernameHeader.textContent = 'Telegram WebApp not available';
-        }
-    </script>
+// Run the function to handle parameters on page load
+handleParams();
+</script>
 </body>
 </html>
